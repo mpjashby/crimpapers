@@ -22,7 +22,7 @@ if (FALSE === OUTPUT_DAILY_EMAIL) trigger_error('Terminating script because this
 if (in_array(date("D"), array("Sat", "Sun"))) trigger_error("Terminating script because it is not a weekday");
 
 // specify start of time period on which search should start
-if (date("D") == "Mon") {
+if (date("D") == "Tue") {
   $result_start_date = date('Y-m-d', date('U') - (60 * 60 * 24 * 3));
 } else {
   $result_start_date = date('Y-m-d', date('U') - (60 * 60 * 24));
@@ -124,7 +124,7 @@ if ($numjournals === FALSE) {
 // finish output
 $signoff_text = SERVICE_DESCRIPTION . '. This service checks for new articles on the websites of ' . $journalcount 
     . ' journals. ' . SERVICE_DISCLAIMER . '.';
-$output_html .= '<p class="note">' . $signoff_text . '</p>';
+$output_html .= '<p class="note" style="margin-top: 1.5em;">' . $signoff_text . '</p>';
 $output_text .= "\r\n\r\n\r\n" . $signoff_text;
 
 // write HTML file to server
