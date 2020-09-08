@@ -47,12 +47,13 @@ $most_recent = array();
 while ($most_recent_this_data = $most_recent_data->fetch_assoc()) {
 	$most_recent[$most_recent_this_data['output']] = ($timenow - strtotime($most_recent_this_data['timestamp']))/60;
 }
-$called_scripts = array();
+//$called_scripts = array();
 
 // call makeweeklyemail.php at 0905 every Monday
-if (OUTPUT_WEEKLY_EMAIL === TRUE AND ((gmdate('l', $timenow) == 'Monday' AND gmdate("Hi", $timenow) == '0905') 
-	OR $most_recent['weekly_email'] > (60*24*7))) {
-// if (OUTPUT_WEEKLY_EMAIL === TRUE AND date("Hi", $timenow) == '0905' AND date("l", $timenow) == 'Monday') {
+if (
+        OUTPUT_WEEKLY_EMAIL === TRUE AND 
+        ((gmdate('l Hi', $timenow) == 'Monday 0905') OR $most_recent['weekly_email'] > (60 * 24 * 7))
+) {
     log_event('Calling makeweeklyemail.php');
     update_timestamps(array('weekly_email'));
     ob_start();
@@ -67,7 +68,7 @@ if (OUTPUT_WEEKLY_EMAIL === TRUE AND ((gmdate('l', $timenow) == 'Monday' AND gmd
 }
 
 // call generatewebpage.php at 0010 every day
-if (OUTPUT_WEB === TRUE AND (gmdate('Hi', $timenow) == '0010' OR $most_recent['webpage'] > (60*24))) {
+if (OUTPUT_WEB === TRUE AND (gmdate('Hi', $timenow) == '0010' OR $most_recent['webpage'] > (60 * 24))) {
     log_event('Calling generatewebpage.php');
     update_timestamps(array('webpage'));
     ob_start();
@@ -82,7 +83,7 @@ if (OUTPUT_WEB === TRUE AND (gmdate('Hi', $timenow) == '0010' OR $most_recent['w
 }
 
 // call makedailyemail.php at 1215 every day
-if (OUTPUT_DAILY_EMAIL === TRUE AND (gmdate("Hi", $timenow) == '1220' OR $most_recent['daily_email'] > (60*24))) {
+if (OUTPUT_DAILY_EMAIL === TRUE AND (gmdate("Hi", $timenow) == '1220' OR $most_recent['daily_email'] > (60 * 24))) {
     log_event('Calling makedailyemail.php');
     update_timestamps(array('daily_email'));
     ob_start();
@@ -106,7 +107,7 @@ if (in_array(intval(gmdate("i", $timenow)), array(0,15,30,45)) OR $most_recent['
     log_event('Finished calling getfeed.php');
 //    $called_scripts[] = 'get_feed';
 } else {
-	log_event('Not calling getfeed.php because time (' . date('i', $timenow) . ') is not right');
+    log_event('Not calling getfeed.php because time (' . date('i', $timenow) . ') is not right');
 }
 
 // call sendtweet.php every 5 minutes
@@ -122,6 +123,14 @@ if (OUTPUT_TWITTER === TRUE AND (intval(gmdate("i", $timenow)) % 5 == 0 OR $most
 	log_event('Not calling sendtweet.php because time is not right');
 } else {
 	log_event('Not calling sendtweet.php because OUTPUT_TWITTER == FALSE');
+}
+
+// clear logs once a week
+if (gmdate("l Hi", $timenow) == "Sunday 0005") {
+    ob_start();
+    include("cleanlogs.php");
+    ob_end_clean();
+    log_event('Finished calling cleanlogs.php');
 }
 
 ?>
