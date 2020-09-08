@@ -19,7 +19,7 @@ require_once('initialise.php');
 if (FALSE === OUTPUT_DAILY_EMAIL) trigger_error('Terminating script because this type of output is not enabled', E_USER_ERROR);
 
 // die if day is a weekend
-if (in_array(date("D"), array("Sat", "Sun", "Tue"))) trigger_error("Terminating script because it is not a weekday", E_USER_ERROR);
+if (in_array(date("D"), array("Sat", "Sun"))) trigger_error("Terminating script because it is not a weekday", E_USER_ERROR);
 
 // specify start of time period on which search should start
 if (date("D") == "Mon") {
