@@ -18,9 +18,19 @@ require_once('initialise.php');
 // die if this type of output is not enabled
 if (FALSE === OUTPUT_DAILY_EMAIL) trigger_error('Terminating script because this type of output is not enabled');
 
-// get articles added to the database in the past day
+// die if day is a weekend
+if (in_array(date("D"), array("Sat", "Sun"))) trigger_error("Terminating script because it is not a weekday");
+
+// specify start of time period on which search should start
+if (date("D") == "Mon") {
+  $result_start_date = date('Y-m-d', date('U') - (60 * 60 * 24 * 3));
+} else {
+  $result_start_date = date('Y-m-d', date('U') - (60 * 60 * 24));
+}
+
+// get articles added to the database in the past day/three days
 $result = db_query('SELECT * FROM `journals`, `articles` WHERE `articles`.`timestamp` >= "' 
-    . date('Y-m-d',date('U')-(60*60*24)) . '" AND `articles`.`timestamp` < "' . date('Y-m-d') 
+    . $result_start_date . '" AND `articles`.`timestamp` < "' . date('Y-m-d') 
     . '" AND `articles`.`excluded` = 0 AND `articles`.`journal`=`journals`.`id` AND `journals`.`active` = 1'
     . ' ORDER BY `journals`.`impact` DESC, `articles`.`date` ASC');
 if ($result === FALSE) {
@@ -190,4 +200,3 @@ if ($new_messages !== FALSE AND $new_messages->num_rows > 0) {
 
 log_event('Finished processing file \'' . THIS_FILE_NAME . '\' on ' . date('r'));
 
-?>
