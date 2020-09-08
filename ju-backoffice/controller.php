@@ -82,8 +82,12 @@ if (OUTPUT_WEB === TRUE AND (gmdate('Hi', $timenow) == '0010' OR $most_recent['w
 	log_event('Not calling generatewebpage.php because OUTPUT_WEB == FALSE');
 }
 
-// call makedailyemail.php at 1215 every day
-if (OUTPUT_DAILY_EMAIL === TRUE AND (gmdate("Hi", $timenow) == '1220' OR $most_recent['daily_email'] > (60 * 24))) {
+// call makedailyemail.php at 0900 every weekday
+if (
+    OUTPUT_DAILY_EMAIL === TRUE 
+//    AND intval(gmdate("N", $timenow)) <= 5 
+    AND (gmdate("Hi", $timenow) == '0900' OR $most_recent['daily_email'] > (60 * 24))
+) {
     log_event('Calling makedailyemail.php');
     update_timestamps(array('daily_email'));
     ob_start();

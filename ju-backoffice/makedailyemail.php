@@ -16,10 +16,10 @@ if (!defined('THIS_FILE_NAME')) define("THIS_FILE_NAME", "makedailyemail");
 require_once('initialise.php');
 
 // die if this type of output is not enabled
-if (FALSE === OUTPUT_DAILY_EMAIL) trigger_error('Terminating script because this type of output is not enabled');
+if (FALSE === OUTPUT_DAILY_EMAIL) trigger_error('Terminating script because this type of output is not enabled', E_USER_ERROR);
 
 // die if day is a weekend
-if (in_array(date("D"), array("Sat", "Sun", "Tue"))) trigger_error("Terminating script because it is not a weekday");
+if (in_array(date("D"), array("Sat", "Sun", "Tue"))) trigger_error("Terminating script because it is not a weekday", E_USER_ERROR);
 
 // specify start of time period on which search should start
 if (date("D") == "Mon") {
