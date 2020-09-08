@@ -87,12 +87,19 @@ if (OUTPUT_DAILY_EMAIL === TRUE) {
 	<p>Get a once-daily email listing all the articles added to the various journal websites in the previous 24 hours.
 	You can also read <a href="<?= SERVICE_URL ?>today/" title="most-recent daily email">the most-recent email</a> online.
 	Your email address won’t be shared with anyone else or used for any other purpose.</p>
-	
+        
+        <p>To subscribe to the daily mailing list, send a blank email to 
+        <a href="mailto:<?= MAILING_LIST_DAILY_SUBSCRIBE ?>"><?= MAILING_LIST_DAILY_SUBSCRIBE ?></a> – you will receive an 
+        automated reply asking you to click a link to confirm your subscription. You can unsubscribe at any time by following 
+        the instructions at the end of every email alert you receive.</p>
+
+<!--        
 	<form action="./subscribe/" method="POST">
 		<p>Subscribe to daily updates: <input type="email" name="email" placeholder="Your email address" required 
 		style="width: 20em; margin-right: 1em;"><input type="hidden" id="freqdaily" name="frequency" value="daily">
 		<button type="submit">Subscribe</button></p>
 	</form>
+-->
 
 <?php
 

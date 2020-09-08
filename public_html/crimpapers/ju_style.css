@@ -18,7 +18,6 @@ h2 {
 
 h3, section h2 {
 	margin-top: 2em;
-	font-weight: 1.2em;
 	font-weight: normal;
 	font-style: italic;
 }
@@ -39,7 +38,7 @@ p.messagedate {
 }
 
 div.error {
-	margin 3em 0;
+	margin: 3em 0;
 	padding: 0.5em 1em;
 	border: 1pt solid #333;
 	color: #000;

@@ -2,8 +2,7 @@
 
 /**
 
-This script constructs the daily email alert and sends it, as well as writing a copy of the HTML email to the web
-server as a reference
+This script allows users to subscribe to the service
 
 All configurable variables are in the file config.php
 

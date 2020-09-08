@@ -37,7 +37,7 @@ if ($result === FALSE) {
     trigger_error(db_error() ,E_USER_ERROR);
 }
 
-// don't send email if there are no untweeted articles
+// don't send email if there are no articles from the relevant period
 if ($result->num_rows<1) {
 	log_event('No articles retrieved');
 	return; // this ends processing of makedailyemail.php and goes back to the calling script, if any
