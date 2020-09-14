@@ -108,6 +108,7 @@ if (OUTPUT_DAILY_EMAIL === TRUE) {
 if (OUTPUT_WEEKLY_EMAIL === TRUE) {
 
 ?>
+<!--
 	<h2>Weekly email alerts</h2>
 	
 	<p>Get a once-weekly email on Mondays listing all the articles added in the previous seven days.
@@ -119,6 +120,7 @@ if (OUTPUT_WEEKLY_EMAIL === TRUE) {
 		style="width: 20em; margin-right: 1em;"><input type="hidden" id="freqweekly" name="frequency" value="weekly">
 		<button type="submit">Subscribe</button></p>
 	</form>
+-->
 
 <?php
 
