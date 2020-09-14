@@ -15,6 +15,32 @@ define("THIS_FILE_NAME", "unsubscribe");
 // require initialisation script
 require_once('../../../ju-backoffice/initialise.php');
 
+
+
+
+
+
+
+
+
+
+
+
+// redirect to the service home page rather than run the code below, since
+// subscription is now managed outside this script
+header("Location: " . SERVICE_URL, TRUE, 301);
+die();
+
+
+
+
+
+
+
+
+
+
+
 // get and sanitise any input vars
 // also set flag to determine whether necessary information is present
 if (filter_has_var(INPUT_GET, 'email') AND filter_has_var(INPUT_GET, 'token')) {

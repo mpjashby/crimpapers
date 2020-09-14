@@ -15,6 +15,30 @@ define("THIS_FILE_NAME", "subscribe");
 require_once('../../../ju-backoffice/initialise.php');
 
 
+
+
+
+
+
+
+
+
+
+// redirect to the service home page rather than run the code below, since
+// subscription is now managed outside this script
+header("Location: " . SERVICE_URL, TRUE, 301);
+die();
+
+
+
+
+
+
+
+
+
+
+
 // This script has four step:
 //  1. presents a form for the user to enter their email address and choose a frequency of alerts (if available)
 //  2. generates a confirmation email, sends it and tells the user to check their email for a confirmation message
