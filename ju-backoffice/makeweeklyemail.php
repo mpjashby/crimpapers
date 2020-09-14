@@ -152,38 +152,40 @@ if ($recipients === FALSE) {
 log_event('Sending emails');
 
 // send emails
-$emailstats = array('success' => 0, 'failure' => 0);
-while ($recipient = $recipients->fetch_assoc()) {
-
-	// pause (to stay below rate limit)
-	sleep(EMAIL_PAUSE);
-	
-	// extend the script execution time
-	set_time_limit((EMAIL_PAUSE * 2 < 30 ? 30 : EMAIL_PAUSE * 2));
-
-	// build unsubscribe link
-	$unsub_html = '<p class="note"><a href="' . SERVICE_URL . 'unsubscribe/?email=' . urlencode($recipient['email']) 
-		. '&token=' . $recipient['token'] . '">Unsubscribe from ' . SERVICE_NAME . ' email updates</a></p>';
-	$unsub_text = "\r\n\r\n" . 'Unsubscribe from '. SERVICE_NAME . ' email updates: ' . SERVICE_URL 
-		. 'unsubscribe/?email=' . urlencode($recipient['email']) . '&token=' . $recipient['token'];
-
-	// send email
-	$mailcheck = sendMultiPartMail(
-		$recipient['email'], // recipient
-		SERVICE_NAME . ' weekly update – ' . $subject_message, // subject
-		$output_html . $unsub_html . '</body></html>', // HTML body
-		$output_text . $unsub_text // plain-text body
-		);
-	if ($mailcheck !== TRUE) {
-		++$emailstats['failure'];
-		log_event('  Email could not be sent to ' . $recipient['email']);
-	} else {
-		++$emailstats['success'];
-		log_event('  Email successfully sent to ' . $recipient['email']);
-	}
-
-}
-log_event('Sent ' . $emailstats['success'] . ' emails successfully with ' . $emailstats['failure'] . ' failures');
+// THE FOLLOWING CODE COMMENTED OUT WHILE WEEKLY UPDATES ARE SUSPENDED – THIS
+// SCRIPT SHOULD STILL RUN OVERALL TO CREATE THE WEEKLY WEBPAGE
+//$emailstats = array('success' => 0, 'failure' => 0);
+//while ($recipient = $recipients->fetch_assoc()) {
+//
+//	// pause (to stay below rate limit)
+//	sleep(EMAIL_PAUSE);
+//	
+//	// extend the script execution time
+//	set_time_limit((EMAIL_PAUSE * 2 < 30 ? 30 : EMAIL_PAUSE * 2));
+//
+//	// build unsubscribe link
+//	$unsub_html = '<p class="note"><a href="' . SERVICE_URL . 'unsubscribe/?email=' . urlencode($recipient['email']) 
+//		. '&token=' . $recipient['token'] . '">Unsubscribe from ' . SERVICE_NAME . ' email updates</a></p>';
+//	$unsub_text = "\r\n\r\n" . 'Unsubscribe from '. SERVICE_NAME . ' email updates: ' . SERVICE_URL 
+//		. 'unsubscribe/?email=' . urlencode($recipient['email']) . '&token=' . $recipient['token'];
+//
+//	// send email
+//	$mailcheck = sendMultiPartMail(
+//		$recipient['email'], // recipient
+//		SERVICE_NAME . ' weekly update – ' . $subject_message, // subject
+//		$output_html . $unsub_html . '</body></html>', // HTML body
+//		$output_text . $unsub_text // plain-text body
+//		);
+//	if ($mailcheck !== TRUE) {
+//		++$emailstats['failure'];
+//		log_event('  Email could not be sent to ' . $recipient['email']);
+//	} else {
+//		++$emailstats['success'];
+//		log_event('  Email successfully sent to ' . $recipient['email']);
+//	}
+//
+//}
+//log_event('Sent ' . $emailstats['success'] . ' emails successfully with ' . $emailstats['failure'] . ' failures');
 
 // update the status of any system messages that have now been sent
 if ($new_messages !== FALSE AND $new_messages->num_rows > 0) {

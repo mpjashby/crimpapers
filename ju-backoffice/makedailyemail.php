@@ -165,8 +165,8 @@ while ($recipient = $recipients->fetch_assoc()) {
 	
 	// build unsubscribe link
         // 
-        $unsub_html = '<p class="note">Unsubscribe at <a href="http://www.mailinglists.ucl.ac.uk/mailman/listinfo/scs-crimpapers">http://www.mailinglists.ucl.ac.uk/mailman/listinfo/scs-crimpapers</a> or by sending a blank email to <a href="mailto:scs-crimpapers-leave@ucl.ac.uk">scs-crimpapers-leave@ucl.ac.uk</a></p>';
-        $unsub_text = 'Unsubscribe at http://www.mailinglists.ucl.ac.uk/mailman/listinfo/scs-crimpapers or by sending a blank email to scs-crimpapers-leave@ucl.ac.uk';
+        $unsub_html = '<p class="note">Unsubscribe by sending a blank email to <a href="mailto:scs-crimpapers-leave@ucl.ac.uk">scs-crimpapers-leave@ucl.ac.uk</a></p><p class="note">To contact the list owner, email <a href="mailto:scs-crimpapers-owner@ucl.ac.uk">scs-crimpapers-owner@ucl.ac.uk</a></p>';
+        $unsub_text = 'Unsubscribe by sending a blank email to scs-crimpapers-leave@ucl.ac.uk\r\n\r\nTo contact the list owner, email scs-crimpapers-owner@ucl.ac.uk';
 //	$unsub_html = '<p class="note"><a href="' . SERVICE_URL . 'unsubscribe/?email=' . urlencode($recipient['email']) 
 //		. '&token=' . $recipient['token'] . '">Unsubscribe from ' . SERVICE_NAME . ' email updates</a></p>';
 //	$unsub_text = "\r\n\r\n" . 'Unsubscribe from '. SERVICE_NAME . ' email updates: ' . SERVICE_URL 
